@@ -28,10 +28,11 @@ for i in range(len(chromosomes)):
     print(f"Chromosome c{i+1}(binary:{chrom},integer:{int(chrom,2)})-Fitness Value:{fitness_value},Probability:{probability:.3f}, Bin Range:{start:.3f}-{end:.3f}")
     start=end
     
-random_value=random.random()
+random_values=[random.random() for _ in range(4)]
 
-for start,end,chrom in bins:
-    if start<=random_value<end:
-        print(f"Random Value:{random_value:.2f} falls in Bin Range:{start:.3f}-{end:.3f} for Chromosome:{chrom}")
-        break
+for random_value in random_values:
+    for start,end,chrom in bins:
+        if start<=random_value<end:
+            print(f"Random Value:{random_value:.2f} falls in Bin Range:{start:.3f}-{end:.3f} for Chromosome:{chrom}")
+            break
 
