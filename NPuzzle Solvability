@@ -1,0 +1,48 @@
+puzzle = [[6, 1, 10, 2],
+          [7, 11, 4, 14],
+          [5, 0, 9, 15],
+          [8, 12, 13, 3]]
+"""         
+puzzle = [[6, 1, 10, 2],
+          [7, 11, 4, 14],
+          [5, 0, 0, 15],
+          [8, 12, 13, 3]]
+          
+puzzle = [[7, 1, 2 ],
+          [5, 0, 4],
+          [8, 3, 6]]
+"""
+
+def count_inversions(puzzle):
+    puzzle_flat = [tile for row in puzzle for tile in row if tile != 0]
+    
+    inversions = 0
+    for i in range(len(puzzle_flat)):
+        for j in range(i + 1, len(puzzle_flat)):
+            if puzzle_flat[i] > puzzle_flat[j]:
+                inversions = inversions + 1
+    return inversions
+    
+def find_blank_tile(puzzle):
+    for i in range(len(puzzle)):
+        if 0 in puzzle[i]:
+          
+            return len(puzzle) - i
+    return -1 
+
+def is_solvable(puzzle):
+    inversions = count_inversions(puzzle)
+    blank_row = find_blank_tile(puzzle)
+    
+    if len(puzzle) % 2 == 1:
+        return inversions % 2 == 0
+    else:
+        if blank_row % 2 == 1:
+            return inversions % 2 == 0
+        else:
+            return inversions % 2 == 1
+
+if is_solvable(puzzle):
+    print("The puzzle is solvable.")
+else:
+    print("The puzzle is not solvable.")
